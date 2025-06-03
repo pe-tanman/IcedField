@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using TMPro;
 using System.Collections;
+using System;
 
 
 public class TileCount : MonoBehaviour
@@ -11,6 +12,9 @@ public class TileCount : MonoBehaviour
     public TileBase secondTile;  // Tile to replace with
 
     public TextMeshProUGUI tileCounterText;  // UI Text to display the count of tiles
+    public TextMeshProUGUI Player1ScoreText;  // UI Text to display the countdown
+    public TextMeshProUGUI Player2ScoreText;  // UI Text to display the countdown
+    public GameObject resultBoard;  // Reference to the result board
 
 
     private int firstTileCount = 0;  // Count of the first tile
@@ -22,11 +26,6 @@ public class TileCount : MonoBehaviour
     void Start()
     {
         startCountdown();
-        if (time <= 0)
-        {
-            getAllTiles();
-        }
-
     }
     void startCountdown()
     {
@@ -41,9 +40,10 @@ public class TileCount : MonoBehaviour
                 }
                 yield return new WaitForSeconds(1f);
             }
+            getAllTiles();
         }
         StartCoroutine(TimerCoroutine());
-}
+    }
     void getAllTiles()
     {
         BoundsInt bounds = tilemap.cellBounds;
@@ -64,7 +64,22 @@ public class TileCount : MonoBehaviour
             }
         }
 
-        print("Count of first tile: " + firstTileCount);
-        print("Count of second tile: " + secondTileCount);
+        Debug.Log("First Tile Count: " + firstTileCount);
+        Debug.Log("Total Tiles Count: " + allTiles.Length);
+
+        float convertedFirstTileCount = (float)firstTileCount;
+        float convertedSecondTileCount = (float)secondTileCount;
+        float totalTiles = (float)allTiles.Length;
+
+        float player1Score = (convertedFirstTileCount / totalTiles) * 100f;
+        float player2Score = (convertedSecondTileCount / totalTiles) * 100f;
+
+        Debug.Log("Player 1 Score: " + player1Score + "%");
+        Debug.Log("Player 2 Score: " + player2Score + "%");
+
+        Player1ScoreText.text = Math.Round(player1Score, 1).ToString() + "%";
+        Player2ScoreText.text = Math.Round(player2Score, 1).ToString() + "%";
+
+        resultBoard.SetActive(true);
     }
 }

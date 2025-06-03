@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public TileBase heavyIce;
     public TileBase myIce;  // tile to replace with
 
+    public Vector2 startPosition;  // Start position of the player
+
     //自分の色に一つでも乗っかってたらはやいっていう設定に
 
     void Start()
@@ -55,9 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 playerWorldPos = transform.position;
         Vector3Int cellPos = tilemap.WorldToCell(playerWorldPos);
-        Debug.Log("cellPos: " + cellPos);
         TileBase currentTile = tilemap.GetTile(cellPos);
-        Debug.Log("Current Tile: " + currentTile);
 
         if (currentTile == lightIce)
         {
@@ -68,5 +68,13 @@ public class PlayerController : MonoBehaviour
         {
             maxSpeed = 8f;
         }
-}
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Plane"))
+        {
+            transform.position = startPosition;
+        }
+    }
 }

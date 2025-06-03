@@ -70,8 +70,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
+        print("Collision with: " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Plane"))
         {
             transform.position = startPosition;

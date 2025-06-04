@@ -16,6 +16,7 @@ public class TileCount : MonoBehaviour
     public TextMeshProUGUI Player2ScoreText;  // UI Text to display the countdown
     public GameObject resultBoard;  // Reference to the result board
     public GameObject readyBoard;
+    public bool isGameMaster = false;
 
 
     private int firstTileCount = 0;  // Count of the first tile
@@ -53,7 +54,11 @@ public class TileCount : MonoBehaviour
                 }
                 yield return new WaitForSeconds(1f);
             }
-            getAllTiles();
+            if (isGameMaster)
+            {
+                getAllTiles();
+            }
+            
         }
         StartCoroutine(TimerCoroutine());
     }
@@ -87,8 +92,6 @@ public class TileCount : MonoBehaviour
         float player1Score = (convertedFirstTileCount / totalTiles) * 100f;
         float player2Score = (convertedSecondTileCount / totalTiles) * 100f;
 
-        Debug.Log("Player 1 Score: " + player1Score + "%");
-        Debug.Log("Player 2 Score: " + player2Score + "%");
 
         Player1ScoreText.text = Math.Round(player1Score, 1).ToString() + "%";
         Player2ScoreText.text = Math.Round(player2Score, 1).ToString() + "%";

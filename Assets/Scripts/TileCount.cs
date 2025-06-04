@@ -16,7 +16,8 @@ public class TileCount : MonoBehaviour
     public TextMeshProUGUI Player1ScoreText;  // UI Text to display the countdown
     public TextMeshProUGUI Player2ScoreText;  // UI Text to display the countdown
     public GameObject resultBoard;  // Reference to the result board
-    public GameObject readyBoard;
+    public GameObject readyBoard1;
+    public GameObject readyBoard2;
 
 
     private int firstTileCount = 0;  // Count of the first tile
@@ -42,12 +43,13 @@ public class TileCount : MonoBehaviour
                     timeCounterText2.text = i.ToString();
                 yield return new WaitForSeconds(1f);
             }
-            readyBoard.SetActive(false);
+            readyBoard1.SetActive(false);
+            readyBoard2.SetActive(false);
             for (int i = time; i >= 0; i--)
             {
                 time--;
-                    timeCounterText1.text = i.ToString();
-                    timeCounterText2.text = i.ToString();
+                timeCounterText1.text = i.ToString();
+                timeCounterText2.text = i.ToString();
                 yield return new WaitForSeconds(1f);
             }
                 getAllTiles();

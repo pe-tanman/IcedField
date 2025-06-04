@@ -10,6 +10,7 @@ public class TileCount : MonoBehaviour
     public Tilemap tilemap;  // Reference to the Tilemap component
     public TileBase firstTile;  // Tile to be replaced
     public TileBase secondTile;  // Tile to replace with
+    public TileBase seaTile;  // Tile to replace with
 
     public TextMeshProUGUI timeCounterText1; 
     public TextMeshProUGUI timeCounterText2;  // UI Text to display the countdown
@@ -22,6 +23,7 @@ public class TileCount : MonoBehaviour
 
     private int firstTileCount = 0;  // Count of the first tile
     private int secondTileCount = 0;  // Count of the second tile
+    private int fieldTileCount = 0;
     public int time = 60;
     public int readyTime = 2;
 
@@ -74,15 +76,15 @@ public class TileCount : MonoBehaviour
                 {
                     secondTileCount++;
                 }
+
+                if(tile != seaTile)
+                fieldTileCount++;
             }
         }
 
-        Debug.Log("First Tile Count: " + firstTileCount);
-        Debug.Log("Total Tiles Count: " + allTiles.Length);
-
         float convertedFirstTileCount = (float)firstTileCount;
         float convertedSecondTileCount = (float)secondTileCount;
-        float totalTiles = (float)allTiles.Length;
+        float totalTiles = (float)fieldTileCount;
 
         float player1Score = (convertedFirstTileCount / totalTiles) * 100f;
         float player2Score = (convertedSecondTileCount / totalTiles) * 100f;

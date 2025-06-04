@@ -15,11 +15,13 @@ public class TileCount : MonoBehaviour
     public TextMeshProUGUI Player1ScoreText;  // UI Text to display the countdown
     public TextMeshProUGUI Player2ScoreText;  // UI Text to display the countdown
     public GameObject resultBoard;  // Reference to the result board
+    public GameObject readyBoard;
 
 
     private int firstTileCount = 0;  // Count of the first tile
     private int secondTileCount = 0;  // Count of the second tile
     public int time = 60;
+    public int readyTime = 2;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -29,8 +31,19 @@ public class TileCount : MonoBehaviour
     }
     void startCountdown()
     {
+
         IEnumerator TimerCoroutine()
         {
+            for (int i = readyTime; i >= 0; i--)
+            {
+                readyTime--;
+                if (tileCounterText != null)
+                {
+                    tileCounterText.text = i.ToString();
+                }
+                yield return new WaitForSeconds(1f);
+            }
+            readyBoard.SetActive(false);
             for (int i = time; i >= 0; i--)
             {
                 time--;

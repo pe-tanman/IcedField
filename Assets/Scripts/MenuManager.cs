@@ -14,8 +14,9 @@ public class MenuManager : MonoBehaviour
     {
 
     }
-    void onPlayAgainButtonPushed()
+    public void goTo2PlayerGame()
     {
         SceneManager.LoadScene("MainScene");
     }
+
 }

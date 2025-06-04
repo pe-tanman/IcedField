@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public float forceWeight = 0.5f;
     public float maxSpeed = 3f;
-    public bool isControlEnabled = true;
+    bool isControlEnabled = false;
     private Rigidbody2D rb;
 
 
@@ -26,8 +26,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(StartCountdown(60));
-
+        StartCoroutine(EnableControlAfterReady(2f));
     }
 
     void Update()
@@ -91,7 +90,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(EnableControlAfterDelay(3f));
                 StartCoroutine(ShrinkOverTime(3f, 10));
                 rb.linearVelocity *= 0.5f;
-        }
+            }
         }
         else
         {
@@ -108,6 +107,14 @@ public class PlayerController : MonoBehaviour
         transform.position = startPosition;
         isControlEnabled = true;
         rb.linearVelocity = Vector2.zero; // Reset velocity
+    }
+    private IEnumerator EnableControlAfterReady(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isControlEnabled = true;
+        StartCoroutine(StartCountdown(60)); // Start countdown for 60 seconds
+
+
     }
     private IEnumerator ShrinkOverTime(float duration, int steps)
     {
@@ -132,4 +139,5 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         isControlEnabled = false;
     }
+    
 }

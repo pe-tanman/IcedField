@@ -11,7 +11,6 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(moveCamera());
     }
 
     void Update()
@@ -22,12 +21,5 @@ public class CameraController : MonoBehaviour
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
             transform.position = smoothedPosition;
         }
-    }
-    private IEnumerator moveCamera()
-    {
-        yield return new WaitForSeconds(60f);
-        isTrackingEnabled = false;
-        transform.position = new Vector3(0, 0, -10);
-        Camera.main.orthographicSize = 23;
     }
 }

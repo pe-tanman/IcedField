@@ -273,7 +273,9 @@ GameObject:
   - component: {fileID: 140341322}
   - component: {fileID: 140341321}
   - component: {fileID: 140341324}
+  - component: {fileID: 140341326}
   - component: {fileID: 140341325}
+  - component: {fileID: 140341327}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -393,7 +395,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_PlayerPrefab: {fileID: 0}
-  m_SplitScreen: 0
+  m_SplitScreen: 1
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
   m_SplitScreenRect:
@@ -402,6 +404,42 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &140341326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140341320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c078910d50d9445e0b5240b5111d22f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 843273710}
+  firstTile: {fileID: 11400000, guid: 4b49446039e904e49948e6430718f052, type: 2}
+  secondTile: {fileID: 11400000, guid: 01200e434134541b2bfba9da2acb9e85, type: 2}
+  timeCounterText1: {fileID: 1060657503}
+  timeCounterText2: {fileID: 1331850538}
+  Player1ScoreText: {fileID: 647893431}
+  Player2ScoreText: {fileID: 1806387110}
+  resultBoard: {fileID: 679960943}
+  readyBoard1: {fileID: 904157068}
+  readyBoard2: {fileID: 1956623868}
+  time: 60
+  readyTime: 2
+--- !u!114 &140341327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140341320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281d3164fe27f45e38aca17914bd5fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &163745496
 GameObject:
   m_ObjectHideFlags: 0
@@ -133507,7 +133545,7 @@ GameObject:
   - component: {fileID: 904157071}
   - component: {fileID: 904157070}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: readyBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133871,7 +133909,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060657500}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c078910d50d9445e0b5240b5111d22f9, type: 3}
   m_Name: 
@@ -133879,12 +133917,13 @@ MonoBehaviour:
   tilemap: {fileID: 843273710}
   firstTile: {fileID: 11400000, guid: 01200e434134541b2bfba9da2acb9e85, type: 2}
   secondTile: {fileID: 11400000, guid: 4b49446039e904e49948e6430718f052, type: 2}
-  tileCounterText: {fileID: 1060657503}
+  timeCounterText1: {fileID: 0}
+  timeCounterText2: {fileID: 0}
   Player1ScoreText: {fileID: 647893431}
   Player2ScoreText: {fileID: 1806387110}
   resultBoard: {fileID: 679960943}
-  readyBoard: {fileID: 904157068}
-  isGameMaster: 1
+  readyBoard1: {fileID: 0}
+  readyBoard2: {fileID: 0}
   time: 60
   readyTime: 2
 --- !u!114 &1060657503
@@ -134343,7 +134382,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1111803802}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 140341327}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: goTo2PlayerGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1111803802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134394,7 +134445,7 @@ GameObject:
   - component: {fileID: 1119674967}
   - component: {fileID: 1119674966}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: timerBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134686,7 +134737,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331850535}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c078910d50d9445e0b5240b5111d22f9, type: 3}
   m_Name: 
@@ -134694,12 +134745,13 @@ MonoBehaviour:
   tilemap: {fileID: 0}
   firstTile: {fileID: 11400000, guid: 01200e434134541b2bfba9da2acb9e85, type: 2}
   secondTile: {fileID: 11400000, guid: 4b49446039e904e49948e6430718f052, type: 2}
-  tileCounterText: {fileID: 1331850538}
+  timeCounterText1: {fileID: 0}
+  timeCounterText2: {fileID: 0}
   Player1ScoreText: {fileID: 647893431}
   Player2ScoreText: {fileID: 1806387110}
   resultBoard: {fileID: 679960943}
-  readyBoard: {fileID: 1956623868}
-  isGameMaster: 0
+  readyBoard1: {fileID: 0}
+  readyBoard2: {fileID: 0}
   time: 60
   readyTime: 2
 --- !u!114 &1331850538
@@ -134950,7 +135002,7 @@ GameObject:
   - component: {fileID: 1507100092}
   - component: {fileID: 1507100091}
   m_Layer: 5
-  m_Name: Canvas 1
+  m_Name: Canvas1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135337,7 +135389,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1868863840}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 140341327}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: goToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1868863840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135388,7 +135452,7 @@ GameObject:
   - component: {fileID: 1880621836}
   - component: {fileID: 1880621835}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: timerBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135464,7 +135528,7 @@ GameObject:
   - component: {fileID: 1956623871}
   - component: {fileID: 1956623870}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: readyBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -11,12 +11,12 @@ public class TileCount : MonoBehaviour
     public TileBase firstTile;  // Tile to be replaced
     public TileBase secondTile;  // Tile to replace with
 
-    public TextMeshProUGUI tileCounterText;  // UI Text to display the count of tiles
+    public TextMeshProUGUI timeCounterText1; 
+    public TextMeshProUGUI timeCounterText2;  // UI Text to display the countdown
     public TextMeshProUGUI Player1ScoreText;  // UI Text to display the countdown
     public TextMeshProUGUI Player2ScoreText;  // UI Text to display the countdown
     public GameObject resultBoard;  // Reference to the result board
     public GameObject readyBoard;
-    public bool isGameMaster = false;
 
 
     private int firstTileCount = 0;  // Count of the first tile
@@ -38,26 +38,19 @@ public class TileCount : MonoBehaviour
             for (int i = readyTime; i >= 0; i--)
             {
                 readyTime--;
-                if (tileCounterText != null)
-                {
-                    tileCounterText.text = i.ToString();
-                }
+                    timeCounterText1.text = i.ToString();
+                    timeCounterText2.text = i.ToString();
                 yield return new WaitForSeconds(1f);
             }
             readyBoard.SetActive(false);
             for (int i = time; i >= 0; i--)
             {
                 time--;
-                if (tileCounterText != null)
-                {
-                    tileCounterText.text = i.ToString();
-                }
+                    timeCounterText1.text = i.ToString();
+                    timeCounterText2.text = i.ToString();
                 yield return new WaitForSeconds(1f);
             }
-            if (isGameMaster)
-            {
                 getAllTiles();
-            }
             
         }
         StartCoroutine(TimerCoroutine());

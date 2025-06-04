@@ -6,8 +6,10 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public float forceWeight = 0.5f;
-    public float maxSpeed = 3f;
+    public enum PlayerType { WASD, YGHJ, ArrowKeys, Mouse }
+    public PlayerType playerType = PlayerType.WASD;
+    float forceWeight = 0.2f;
+    float maxSpeed = 3f;
     bool isControlEnabled = false;
     private Rigidbody2D rb;
 
@@ -26,14 +28,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(EnableControlAfterReady(2f));
+        StartCoroutine(EnableControlAfterReady(3f));
     }
 
     void Update()
     {
         Move();
         Rotate();
-        ChangeColor();
+        OnTile();
     }
 
     void Rotate()
@@ -49,20 +51,56 @@ public class PlayerController : MonoBehaviour
         if (!isControlEnabled) return;
 
         Vector2 inputDir = Vector2.zero;
-        if (Keyboard.current.wKey.isPressed && Vector2.Dot(rb.linearVelocity, Vector2.up) < maxSpeed)
-            inputDir.y += 1f;
-        if (Keyboard.current.sKey.isPressed && Vector2.Dot(rb.linearVelocity, Vector2.down) < maxSpeed)
-            inputDir.y -= 1f;
-        if (Keyboard.current.dKey.isPressed && Vector2.Dot(rb.linearVelocity, Vector2.right) < maxSpeed)
-            inputDir.x += 1f;
-        if (Keyboard.current.aKey.isPressed && Vector2.Dot(rb.linearVelocity, Vector2.left) < maxSpeed)
-            inputDir.x -= 1f;
+
+        switch (playerType)
+        {
+            case PlayerType.WASD:
+                if (Keyboard.current.wKey.isPressed)
+                    inputDir.y += 1f;
+                if (Keyboard.current.sKey.isPressed)
+                    inputDir.y -= 1f;
+                if (Keyboard.current.dKey.isPressed)
+                    inputDir.x += 1f;
+                if (Keyboard.current.aKey.isPressed)
+                    inputDir.x -= 1f;
+                break;
+            case PlayerType.YGHJ:
+                if (Keyboard.current.yKey.isPressed)
+                    inputDir.y += 1f;
+                if (Keyboard.current.hKey.isPressed)
+                    inputDir.y -= 1f;
+                if (Keyboard.current.gKey.isPressed)
+                    inputDir.x += 1f;
+                if (Keyboard.current.jKey.isPressed)
+                    inputDir.x -= 1f;
+                break;
+            case PlayerType.ArrowKeys:
+                if (Keyboard.current.upArrowKey.isPressed)
+                    inputDir.y += 1f;
+                if (Keyboard.current.downArrowKey.isPressed)
+                    inputDir.y -= 1f;
+                if (Keyboard.current.rightArrowKey.isPressed)
+                    inputDir.x += 1f;
+                if (Keyboard.current.leftArrowKey.isPressed)
+                    inputDir.x -= 1f;
+                break;
+            case PlayerType.Mouse:
+                inputDir = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                break;
+        }
 
         inputDir = inputDir.normalized;
-        rb.AddForce(inputDir * forceWeight, ForceMode2D.Force);
+
+        if (Vector2.Dot(rb.linearVelocity, inputDir) < maxSpeed)
+        {
+            rb.AddForce(inputDir * forceWeight, ForceMode2D.Force);
+        }
+        return;
+
+
 
     }
-    void ChangeColor()
+    void OnTile()
     {
         Vector3 playerWorldPos = transform.position;
         Vector3Int cellPos = tilemap.WorldToCell(playerWorldPos);
@@ -70,7 +108,8 @@ public class PlayerController : MonoBehaviour
 
         if (currentTile == lightIce)
         {
-            tilemap.SetTile(cellPos, myIce);
+           
+            changeTile(cellPos);
             maxSpeed = 2f;
         }
         else if (currentTile == heavyIce)
@@ -79,8 +118,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (currentTile == myIce)
         {
-            maxSpeed = 8f;
-            //画面揺らしモーションを入れたい
+            maxSpeed = 5f;
         }
         else if (currentTile == seaTile)
         {
@@ -100,7 +138,66 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void changeTile(Vector3Int cellPos)
+    {
+        float zRotation = transform.rotation.eulerAngles.z;
+        Vector3Int rightBack = Vector3Int.zero;
+        Vector3Int leftBack = Vector3Int.zero;
+        Debug.Log("zRotation: " + zRotation);
 
+        if (zRotation <= 22.5 || 337.5 < zRotation)
+        {
+            // Up
+            rightBack = cellPos + new Vector3Int(1, -1, 0);
+            leftBack = cellPos + new Vector3Int(-1, -1, 0);
+        }
+        else if (22.5 < zRotation && zRotation <= 67.5)
+        {
+            // Up-Left
+            rightBack = cellPos + new Vector3Int(1, 0, 0);
+            leftBack = cellPos + new Vector3Int(0, -1, 0);
+        }
+        else if (67.5 < zRotation && zRotation <= 112.5)
+        {
+            // Left
+            rightBack = cellPos + new Vector3Int(1, 1, 0);
+            leftBack = cellPos + new Vector3Int(1, -1, 0);
+        }
+        else if (112.5 < zRotation && zRotation <= 157.5)
+        {
+            // Down-Left
+            rightBack = cellPos + new Vector3Int(1, 0, 0);
+            leftBack = cellPos + new Vector3Int(0, 1, 0);
+        }
+        else if (157.5 < zRotation && zRotation <= 202.5)
+        {
+            // Down
+            rightBack = cellPos + new Vector3Int(1, 1, 0);
+            leftBack = cellPos + new Vector3Int(-1, 1, 0);
+        }
+        else if (202.5 < zRotation && zRotation <= 247.5)
+        {
+            // Down-Right
+            rightBack = cellPos + new Vector3Int(0, 1, 0);
+            leftBack = cellPos + new Vector3Int(-1, 0, 0);
+        }
+        else if (247.5 < zRotation && zRotation <= 292.5)
+        {
+            // Right
+            rightBack = cellPos + new Vector3Int(-1, -1, 0);
+            leftBack = cellPos + new Vector3Int(-1, 1, 0);
+        }
+        else if (292.5 < zRotation && zRotation <= 337.5)
+        {
+            // Up-Right
+            rightBack = cellPos + new Vector3Int(-1, 0, 0);
+            leftBack = cellPos + new Vector3Int(0, -1, 0);
+        }
+
+        tilemap.SetTile(cellPos, myIce);
+        tilemap.SetTile(rightBack, myIce);
+        tilemap.SetTile(leftBack, myIce);
+    }
     private IEnumerator EnableControlAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -130,7 +227,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator LateChangeColor(float duration, Vector3Int cellPos)
     {
         yield return new WaitForSeconds(duration);
-        tilemap.SetTile(cellPos, myIce);
+        changeTile(cellPos);
 
     }
     private IEnumerator StartCountdown(int time)
@@ -139,5 +236,5 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         isControlEnabled = false;
     }
-    
+
 }

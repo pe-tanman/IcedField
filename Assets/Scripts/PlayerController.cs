@@ -2,6 +2,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections;
+using System.Collections.Generic;
 
 
 public class PlayerController : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     float maxSpeed = 3f;
     bool isControlEnabled = false;
     private Rigidbody2D rb;
+    public InputHandler inputHandler;
 
 
     public Tilemap tilemap;
@@ -49,46 +51,9 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         if (!isControlEnabled) return;
-
         Vector2 inputDir = Vector2.zero;
 
-        switch (playerType)
-        {
-            case PlayerType.WASD:
-                if (Keyboard.current.wKey.isPressed)
-                    inputDir.y += 1f;
-                if (Keyboard.current.sKey.isPressed)
-                    inputDir.y -= 1f;
-                if (Keyboard.current.dKey.isPressed)
-                    inputDir.x += 1f;
-                if (Keyboard.current.aKey.isPressed)
-                    inputDir.x -= 1f;
-                break;
-            case PlayerType.YGHJ:
-                if (Keyboard.current.yKey.isPressed)
-                    inputDir.y += 1f;
-                if (Keyboard.current.hKey.isPressed)
-                    inputDir.y -= 1f;
-                if (Keyboard.current.gKey.isPressed)
-                    inputDir.x += 1f;
-                if (Keyboard.current.jKey.isPressed)
-                    inputDir.x -= 1f;
-                break;
-            case PlayerType.ArrowKeys:
-                if (Keyboard.current.upArrowKey.isPressed)
-                    inputDir.y += 1f;
-                if (Keyboard.current.downArrowKey.isPressed)
-                    inputDir.y -= 1f;
-                if (Keyboard.current.rightArrowKey.isPressed)
-                    inputDir.x += 1f;
-                if (Keyboard.current.leftArrowKey.isPressed)
-                    inputDir.x -= 1f;
-                break;
-            case PlayerType.Mouse:
-                inputDir = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-                break;
-        }
-
+        inputDir = inputHandler.moveInput * Time.deltaTime;
         inputDir = inputDir.normalized;
 
         if (Vector2.Dot(rb.linearVelocity, inputDir) < maxSpeed)

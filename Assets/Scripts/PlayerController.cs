@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public enum PlayerType { WASD, YGHJ, ArrowKeys, Mouse }
     public PlayerType playerType = PlayerType.WASD;
-    float forceWeight = 0.2f;
+    float forceWeight = 0.4f;
     float maxSpeed = 3f;
     bool isControlEnabled = false;
     private Rigidbody2D rb;
@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
         {
            
             changeTile(cellPos);
-            maxSpeed = 2f;
+            maxSpeed = 3f;
         }
         else if (currentTile == heavyIce)
         {
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (currentTile == myIce)
         {
-            maxSpeed = 5f;
+            maxSpeed = 10f;
         }
         else if (currentTile == seaTile)
         {

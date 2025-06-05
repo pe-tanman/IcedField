@@ -19,7 +19,8 @@ public class TileCount : MonoBehaviour
     public GameObject resultBoard;  // Reference to the result board
     public GameObject readyBoard1;
     public GameObject readyBoard2;
-
+    public GameObject goText1;
+    public GameObject goText2;
 
     private int firstTileCount = 0;  // Count of the first tile
     private int secondTileCount = 0;  // Count of the second tile
@@ -41,13 +42,23 @@ public class TileCount : MonoBehaviour
             for (int i = readyTime; i >= 0; i--)
             {
                 readyTime--;
-                    timeCounterText1.text = i.ToString();
-                    timeCounterText2.text = i.ToString();
+                timeCounterText1.text = i.ToString();
+                timeCounterText2.text = i.ToString();
                 yield return new WaitForSeconds(1f);
+                
             }
+            
+
             readyBoard1.SetActive(false);
             readyBoard2.SetActive(false);
-            for (int i = time; i >= 0; i--)
+            goText1.SetActive(true);
+            goText2.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            goText1.SetActive(false);
+            goText2.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+
+            for (int i = time - 1; i >= 0; i--)
             {
                 time--;
                 timeCounterText1.text = i.ToString();

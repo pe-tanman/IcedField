@@ -19,6 +19,9 @@
 *.booproj
 *.svd
 
+.gitignore
+
+
 # Rider generated files
 .idea/
 *.sln.iml
@@ -37,3 +40,4 @@ Thumbs.db
 
 # Ignore files created by version control tools
 *.orig
+docs/

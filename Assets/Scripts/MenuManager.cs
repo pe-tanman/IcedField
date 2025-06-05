@@ -22,5 +22,9 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("MenuScene");
     }
+    public void goToHelp()
+    {
+        SceneManager.LoadScene("HelpScene");
+    }
 
 }

@@ -4,9 +4,6 @@ using System.Collections;
 
 public class CameraManager : MonoBehaviour
 {
-
-    public Camera camera1;
-    public Camera camera2;
     public Camera mainCamera;
     public Camera subCamera;
 
@@ -25,8 +22,6 @@ public class CameraManager : MonoBehaviour
     {
         yield return new WaitForSeconds(63);
         mainCamera.enabled = true;
-        camera1.enabled = false;
-        camera2.enabled = false;
         subCamera.enabled = false;
     }
 }

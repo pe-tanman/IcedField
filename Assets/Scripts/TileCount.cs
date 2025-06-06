@@ -12,15 +12,12 @@ public class TileCount : MonoBehaviour
     public TileBase secondTile;  // Tile to replace with
     public TileBase seaTile;  // Tile to replace with
 
-    public TextMeshProUGUI timeCounterText1; 
-    public TextMeshProUGUI timeCounterText2;  // UI Text to display the countdown
+    public TextMeshProUGUI timeCounterText; 
     public TextMeshProUGUI Player1ScoreText;  // UI Text to display the countdown
     public TextMeshProUGUI Player2ScoreText;  // UI Text to display the countdown
     public GameObject resultBoard;  // Reference to the result board
-    public GameObject readyBoard1;
-    public GameObject readyBoard2;
-    public GameObject goText1;
-    public GameObject goText2;
+    public GameObject readyBoard;
+    public GameObject goText;
 
     private int firstTileCount = 0;  // Count of the first tile
     private int secondTileCount = 0;  // Count of the second tile
@@ -42,27 +39,22 @@ public class TileCount : MonoBehaviour
             for (int i = readyTime; i >= 0; i--)
             {
                 readyTime--;
-                timeCounterText1.text = i.ToString();
-                timeCounterText2.text = i.ToString();
+                timeCounterText.text = i.ToString();
                 yield return new WaitForSeconds(1f);
                 
             }
             
 
-            readyBoard1.SetActive(false);
-            readyBoard2.SetActive(false);
-            goText1.SetActive(true);
-            goText2.SetActive(true);
+            readyBoard.SetActive(false);
+            goText.SetActive(true);
             yield return new WaitForSeconds(0.5f);
-            goText1.SetActive(false);
-            goText2.SetActive(false);
+            goText.SetActive(false);
             yield return new WaitForSeconds(0.5f);
 
             for (int i = time - 1; i >= 0; i--)
             {
                 time--;
-                timeCounterText1.text = i.ToString();
-                timeCounterText2.text = i.ToString();
+                timeCounterText.text = i.ToString();
                 yield return new WaitForSeconds(1f);
             }
                 getAllTiles();

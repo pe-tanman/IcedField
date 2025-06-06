@@ -2,13 +2,14 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections;
+using System.Collections.Generic;
 
 
 public class PlayerController : MonoBehaviour
 {
     public enum PlayerType { WASD, YGHJ, ArrowKeys, Mouse }
     public PlayerType playerType = PlayerType.WASD;
-    float forceWeight = 0.4f;
+    float forceWeight = 0.6f;
     float maxSpeed = 3f;
     bool isControlEnabled = false;
     private Rigidbody2D rb;
@@ -21,14 +22,12 @@ public class PlayerController : MonoBehaviour
     public TileBase myIce;  // tile to replace with
 
     public Vector2 startPosition;  // Start position of the player
-    bool isFirstEntered = true;
-
-    //自分の色に一つでも乗っかってたらはやいっていう設定に
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(EnableControlAfterReady(3f));
+        Debug.developerConsoleVisible = true;
     }
 
     void Update()
@@ -93,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
         if (Vector2.Dot(rb.linearVelocity, inputDir) < maxSpeed)
         {
-            rb.AddForce(inputDir * forceWeight, ForceMode2D.Force);
+            rb.AddForce(inputDir * forceWeight, ForceMode2D.Force); // is time.deltaTime necessary here?
         }
         return;
 
@@ -143,7 +142,6 @@ public class PlayerController : MonoBehaviour
         float zRotation = transform.rotation.eulerAngles.z;
         Vector3Int rightBack = Vector3Int.zero;
         Vector3Int leftBack = Vector3Int.zero;
-        Debug.Log("zRotation: " + zRotation);
 
         if (zRotation <= 22.5 || 337.5 < zRotation)
         {
@@ -235,6 +233,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(time);
         rb.linearVelocity = Vector2.zero;
         isControlEnabled = false;
+        transform.GetComponentInChildren<Camera>().enabled = false;
     }
 
 }

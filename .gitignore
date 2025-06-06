@@ -41,3 +41,5 @@ Thumbs.db
 # Ignore files created by version control tools
 *.orig
 docs/
+
+1.0.0-PenguinField.app

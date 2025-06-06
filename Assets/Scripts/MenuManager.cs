@@ -22,6 +22,14 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("MenuScene");
     }
+    public void goToFourPlayerGame()
+    {
+        SceneManager.LoadScene("MainSceneFourPlayers");
+    }
+    public void playAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     public void goToHelp()
     {
         SceneManager.LoadScene("HelpScene");

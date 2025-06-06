@@ -43,3 +43,5 @@ Thumbs.db
 docs/
 
 1.0.0-PenguinField.app
+*.app
+*.gitignore

@@ -1,5 +1,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     public enum PlayerType { WASD, YGHJ, ArrowKeys, Mouse }
     public PlayerType playerType = PlayerType.WASD;
-    float forceWeight = 0.6f;
+    float forceWeight = 600f;
     float maxSpeed = 3f;
     bool isControlEnabled = false;
     private Rigidbody2D rb;
@@ -69,9 +70,9 @@ public class PlayerController : MonoBehaviour
                 if (Keyboard.current.hKey.isPressed)
                     inputDir.y -= 1f;
                 if (Keyboard.current.gKey.isPressed)
-                    inputDir.x += 1f;
-                if (Keyboard.current.jKey.isPressed)
                     inputDir.x -= 1f;
+                if (Keyboard.current.jKey.isPressed)
+                    inputDir.x += 1f;
                 break;
             case PlayerType.ArrowKeys:
                 if (Keyboard.current.upArrowKey.isPressed)
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
         if (Vector2.Dot(rb.linearVelocity, inputDir) < maxSpeed)
         {
-            rb.AddForce(inputDir * forceWeight, ForceMode2D.Force); // is time.deltaTime necessary here?
+            rb.AddForce(inputDir * forceWeight * Time.deltaTime, ForceMode2D.Force); // is time.deltaTime necessary here?
         }
         return;
 

@@ -1052,11 +1052,11 @@ PrefabInstance:
     - target: {fileID: 7225475639355633677, guid: 60e6a4cde3f2b4b4f983507cbaee8573, type: 3}
       propertyPath: readyBoard
       value: 
-      objectReference: {fileID: 4048398254498936294}
+      objectReference: {fileID: 8109291386658395891}
     - target: {fileID: 7225475639355633677, guid: 60e6a4cde3f2b4b4f983507cbaee8573, type: 3}
       propertyPath: readyBoard1
       value: 
-      objectReference: {fileID: 4048398254498936294}
+      objectReference: {fileID: 0}
     - target: {fileID: 7225475639355633677, guid: 60e6a4cde3f2b4b4f983507cbaee8573, type: 3}
       propertyPath: readyBoard2
       value: 
@@ -1130,11 +1130,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60e6a4cde3f2b4b4f983507cbaee8573, type: 3}
---- !u!1 &4048398254498936294 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4621756132832342942, guid: 7c5b1d04349ff4073b1acaa7f6665f5b, type: 3}
-  m_PrefabInstance: {fileID: 8109291386658395890}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6697812518373838761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1270,6 +1265,10 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 843273710}
+    - target: {fileID: 943209568293740742, guid: 7c5b1d04349ff4073b1acaa7f6665f5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2536979439234802889, guid: 7c5b1d04349ff4073b1acaa7f6665f5b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1362,11 +1361,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7064865517691267845, guid: 7c5b1d04349ff4073b1acaa7f6665f5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -33.64978
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746307023906403007, guid: 7c5b1d04349ff4073b1acaa7f6665f5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -27.661621
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c5b1d04349ff4073b1acaa7f6665f5b, type: 3}
+--- !u!1 &8109291386658395891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6504486699892680969, guid: 7c5b1d04349ff4073b1acaa7f6665f5b, type: 3}
+  m_PrefabInstance: {fileID: 8109291386658395890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8412961885698329716 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7403108980507956327, guid: 7c5b1d04349ff4073b1acaa7f6665f5b, type: 3}

@@ -86,7 +86,6 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerType.Mouse:
                 inputDir = Gamepad.current.leftStick.ReadValue();
-                maxSpeed *= 0.5f;
                 break;
         }
 

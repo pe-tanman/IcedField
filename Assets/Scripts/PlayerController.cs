@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerType.Mouse:
                 inputDir = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                maxSpeed *= 0.5f;
                 break;
         }
 

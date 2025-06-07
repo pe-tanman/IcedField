@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 4647757041452990771}
   - component: {fileID: 4555684406044268081}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Stick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1295,13 +1295,13 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7388330982273180756}
   - {fileID: 1089758098988181531}
   - {fileID: 5540882845075680296}
   - {fileID: 6675791079814026497}
   - {fileID: 6364981579296806107}
   - {fileID: 5177953057542061868}
   - {fileID: 7746307023906403007}
-  - {fileID: 7388330982273180756}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1537,7 +1537,7 @@ GameObject:
   - component: {fileID: 514242194787207384}
   - component: {fileID: 1592856089353905663}
   m_Layer: 5
-  m_Name: Image
+  m_Name: GamePad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
